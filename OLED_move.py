@@ -12,7 +12,7 @@ height=32
 #i2c = machine.I2C(0, scl=scl, sda=sda, freq=400000)
 #oled = SSD1306_I2C(width, height, i2c)                  # Init oled display
 i2c = I2C(0, sda=Pin(12), scl=Pin(13), freq=40000)
-oled = SSD1306_I2C(width, height, i2c)
+oled = SSD1306_I2C(128, 32, i2c)
 # Raspberry Pi logo as CAR
 
 buffer = bytearray(b"\x00\x00\x00\x00\x00\
@@ -59,13 +59,13 @@ buffer = bytearray(b"\x00\x00\x00\x00\x00\
 \x00\x00\x00\x00\x00\
 \x00\x00\x00\x00\x00\
 \x00\x00\x00\x00\x00\
-\x00\x00\x00\x00\x00")
+\x00\x00\x00\x00\x00")  #42,48
 
 fb = framebuf.FrameBuffer(buffer, 40, 45, framebuf.MONO_HLSB)
 oled.fill(0)
 
 # Blit the image from the framebuffer to the oled display
-oled.blit(fb, 10, 0)
+oled.blit(fb, 30, 0)
 
 # Add some text
 #oled.text("Raspberry Pi",5,5)
@@ -73,5 +73,25 @@ oled.blit(fb, 10, 0)
 
 # Finally update the oled display so the image & text is displayed
 oled.show()
+sleep(1)
+oled.fill(0)
+oled.show()
+sleep(2)
 
+x=0
+y=0
+while True:
+    #x=(x+1)% width
+    x+=1
+    if x>=128 :
+        x=0
+    y=0#(y+3)% height
+    print(x)
+    oled.fill(0)
+    oled.blit(fb, x, y)
+    #oled.blit(fb, x-width, y)
+#    oled.blit(fb, x, y-height)
+#    oled.blit(fb, x-width, y-height)
+    oled.show()
+    sleep(0.01)
    
