@@ -8,6 +8,11 @@ pwm.duty_u16(10000)
 trig = Pin(10, Pin.OUT)
 echo = Pin(4, Pin.IN)
 
+distance = round(ping()/58)
+while distance <= 15 :
+    for duty in range(600,5000,200):
+        pwm.freq(3000)
+        
 def ping():
     trig.value(1)
     time.sleep_us(10)
@@ -22,7 +27,4 @@ def ping():
             timeout = True
             break
 
-distance = round(ping()/58)
-while distance <= 15 :
-    for duty in range(600,5000,200):
-        pwm.freq(3000)
+
