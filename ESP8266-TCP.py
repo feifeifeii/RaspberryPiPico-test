@@ -53,7 +53,7 @@ sendCMD_waitResp("AT+CWMODE=3\r\n") #set wifi mode 1:client 2:AP 3: Both
 sendCMD_waitResp("AT+CWLAP\r\n", 5000) #all list of AP
 
 utime.sleep(0.5)  #add
-sendCMD_waitResp('AT+CWJAP="FC\'s Galaxy A51","eydg8183"\r\n', 10000) #connecting #前面的x:SSID；後面的x:密碼
+sendCMD_waitResp('AT+CWJAP="帳號","密碼"\r\n', 10000) #connecting #前面的x:SSID；後面的x:密碼
 
 utime.sleep(0.5)
 sendCMD_waitResp("AT\r\n")
